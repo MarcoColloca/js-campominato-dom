@@ -84,23 +84,31 @@ function gameClickStart(){
 
         // Funzione che determina cosa accade quando avviene un click sulla cella della griglia
         function cellClick(){
-    
+            
             console.log('Hai clickato la cella numero ', cellNumber)
-        
             for(bombNumber = 0; bombNumber < bombs.length; bombNumber++){
 
-                if(cellNumber == bombs[bombNumber]){
+                if(cellNumber === bombs[bombNumber]){
+
                     cellDOMElement.classList.add('bg-red')
                     console.log('Mi dispiace, hai perso.')
+
                 } else{
+
                     cellDOMElement.classList.add('bg-azure') //object
+
                 }
-    
             }
 
+            if(!cellDOMElement.classList.contains('bg-red')){
+                score += 1;
+                console.log(score)
+            }
+
+            scoreDOMElement.innerHTML = score;
             cellDOMElement.removeEventListener('click', cellClick)
         }
-
+        
         cellDOMElement.addEventListener('click', cellClick)
     }
 
@@ -111,6 +119,8 @@ function gameClickStart(){
 function gameClickReset(){
 
     gridDOMElement.innerHTML= ''; //string
+    scoreDOMElement.innerHTML = '0'; //string
+    score = 0; //number
     startButtonDOMElement.addEventListener('click', gameClickStart);
 
 }
@@ -130,6 +140,7 @@ function gameClickReset(){
 
 
 
+
 const gridDOMElement = document.getElementById('grid'); //object
 
 const startButtonDOMElement = document.getElementById('generate-grid'); //object
@@ -137,6 +148,12 @@ const startButtonDOMElement = document.getElementById('generate-grid'); //object
 const difficultySelectorDOMElement = document.getElementById('difficulty-selection') //object
 
 const restartButtonDOMElement = document.getElementById('delete-grid') //object
+
+const scoreDOMElement = document.getElementById('score') //object
+
+let score = parseInt(scoreDOMElement.innerHTML)
+console.log(score)
+
 
 
 // Creazione delle varie griglie tramite funzione definita sopra
