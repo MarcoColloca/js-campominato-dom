@@ -23,9 +23,10 @@ function getSize() {
 // // // // // // // // // // // // //
 // // // // // // // // // // // // //
 // Funzione per il click on click //
-function clickAllBombs() {
-    
+function showBombs() {
+
 }
+
 // // // // // // // // // // // // //
 // // // // // // // // // // // // //
 // // // // // // // // // // // // //
@@ -42,7 +43,7 @@ function generateBombs(){
     while (randomUniqueNumbers.length < randomNumbers){
 
         // Genero un numero casuale in base alle vostanti dichiarate fuori
-        let randomNumber = Math.floor(Math.random() * max) + min;            
+        let randomNumber = Math.floor(Math.random() * max) + min;
     
         // SE l'Array randomUniqueNumbers non ha all'interno (randomNumber) → il fatto che indichi l'assenza è dato dalla sua corrispondenza al false, quindi che la condizione dettata è falsa.
         if (randomUniqueNumbers.includes(randomNumber) === false){
@@ -74,22 +75,22 @@ function gameClickStart(){
     for(let i = 0; i < numOfCells; i++){
 
         const cellDOMElement = document.createElement('div');
-        let divClass = 'square-easy' //string
+        let divClass = 'easy' //string
         //console.dir(cellDOMElement)
         const cellNumber = i + 1; //number
         cellDOMElement.innerHTML = cellNumber; //string
 
         if(difficultySelectorDOMElement.value === '10'){
      
-            divClass = 'square-hard'; //string
+            divClass = 'hard'; //string
         
         } else if(difficultySelectorDOMElement.value === '9'){
       
-            divClass = 'square-medium'; //string
+            divClass = 'medium'; //string
            
         } 
 
-        cellDOMElement.classList.add(divClass) //object
+        cellDOMElement.classList.add('square', divClass) //object
         gridDOMElement.appendChild(cellDOMElement) ////object
 
         
@@ -123,7 +124,9 @@ function cellClick(){
     console.log("cellClick", this.innerHTML);
     const cellDOMElement = this;
     const cellNumber = parseInt(cellDOMElement.innerHTML);
-
+    // const allCells = document.getElementsByClassName('square')
+    //console.log(allCells)
+    const allCells = document.querySelectorAll('.square')
     console.log('Hai clickato la cella numero ', cellNumber)
     for(let bombNumber = 0; bombNumber < bombs.length; bombNumber++){
 
@@ -134,21 +137,38 @@ function cellClick(){
         } else{
 
             cellDOMElement.classList.add('bg-red');
-            console.log('Mi dispiace, hai perso.');
-            cellDOMElement.innerHTML = 'BOOM';
+            console.log('Mi dispiace, hai perso.');           
             cellDOMElement.onclick = alert(`Hai perso! il tuo punteggo è: ${score}`);
             let block = document.createElement('div');
             block.classList.add('block');
-            // console.log(gridDOMElement);
             gridDOMElement.append(block);
-            // console.log(block);
+            bombs[bombNumber].click;
+            for (let index = 0; index < allCells.length; index++){
+                const cellValue = parseInt(allCells[index].innerHTML)
+                if(bombs.includes(cellValue)){
+                    allCells[index].classList.add('bg-red');
+                    allCells[index].innerHTML = 'BOOM';
+                }
+            }        
         }
     }
 
+    
+    //console.dir(allCells)
+    console.log(bombs)
+    
+
+    // for (let index = 0; index < allCells.length; index++){
+    //     const cellValue = parseInt(allCells[index].innerHTML)
+    //     if(bombs.includes(cellValue)){
+    //         allCells[index].classList.add('bg-red');
+    //     }
+    // }
+
     if(!cellDOMElement.classList.contains('bg-red')){
         score += 1;
-        console.log(score)
-    }
+        console.log('punteggio attuale: ' + score)
+    } 
 
    
     scoreDOMElement.innerHTML = score;

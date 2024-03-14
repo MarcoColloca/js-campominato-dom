@@ -130,9 +130,8 @@ background-color: rgb(0, 0, 0);
     flex-wrap: wrap;
 }
 
-.square-easy, 
-.square-medium, 
-.square-hard{
+ 
+.square{
     border: 1px solid white;
     display: flex;
     justify-content: center;
@@ -143,18 +142,18 @@ background-color: rgb(0, 0, 0);
 }
 
 
-.square-hard{
+.hard{
     width: 10%;
     aspect-ratio: 1/1;
 }
 
-.square-medium{
+.medium{
     width: calc(100%/9);
     aspect-ratio: 1/1;
 }
 
 
-.square-easy{
+.easy{
     width: calc(100%/7);
     aspect-ratio: 1/1;
 }
