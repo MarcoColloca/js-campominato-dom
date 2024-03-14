@@ -20,6 +20,18 @@ function getSize() {
     return size
 }
 
+// // // // // // // // // // // // //
+// // // // // // // // // // // // //
+// Funzione per il click on click //
+function clickAllBombs() {
+    document.querySelectorAll(".bg-red").forEach(function(cellDOMElement) {
+        cellDOMElement.click();
+    });
+}
+// // // // // // // // // // // // //
+// // // // // // // // // // // // //
+// // // // // // // // // // // // //
+
 // Funzione per la generazione di bombe
 
 function generateBombs(){
@@ -39,7 +51,6 @@ function generateBombs(){
             // Inserisco il numero generato nell'Array
             randomUniqueNumbers.push(randomNumber);
         }
-    
     }
     
 
@@ -65,7 +76,7 @@ function gameClickStart(){
 
         const cellDOMElement = document.createElement('div');
         let divClass = 'square-easy' //string
-
+        //console.dir(cellDOMElement)
         const cellNumber = i + 1; //number
         cellDOMElement.innerHTML = cellNumber; //string
 
@@ -92,7 +103,8 @@ function gameClickStart(){
 
                     cellDOMElement.classList.add('bg-red')
                     console.log('Mi dispiace, hai perso.')
-
+                    cellDOMElement.innerHTML = 'BOOM'
+                    cellDOMElement.onclick = alert(`Hai perso! il tuo punteggo è: ${score}`)
                 } else{
 
                     cellDOMElement.classList.add('bg-azure') //object
@@ -105,11 +117,13 @@ function gameClickStart(){
                 console.log(score)
             }
 
+           
             scoreDOMElement.innerHTML = score;
             cellDOMElement.removeEventListener('click', cellClick)
+
         }
         
-        cellDOMElement.addEventListener('click', cellClick)
+        cellDOMElement.addEventListener('click', cellClick)        
     }
 
     startButtonDOMElement.removeEventListener('click', gameClickStart);
@@ -162,3 +176,6 @@ startButtonDOMElement.addEventListener('click', gameClickStart);
 
 // Reset delle griglie tramite funzione definita sopra
 restartButtonDOMElement.addEventListener('click', gameClickReset);
+
+
+generatedCells = document.getElementsByClassName('bg-red')
