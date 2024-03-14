@@ -20,7 +20,32 @@ function getSize() {
     return size
 }
 
+// Funzione per la generazione di bombe
 
+function generateBombs(){
+    const min = 1;
+    const max = size ** 2;
+    const randomNumbers = 16;
+
+    const randomUniqueNumbers = []
+
+    while (randomUniqueNumbers.length < randomNumbers){
+
+        // Genero un numero casuale in base alle vostanti dichiarate fuori
+        let randomNumber = Math.floor(Math.random() * max) + min;            
+    
+        // SE l'Array randomUniqueNumbers non ha all'interno (randomNumber) → il fatto che indichi l'assenza è dato dalla sua corrispondenza al false, quindi che la condizione dettata è falsa.
+        if (randomUniqueNumbers.includes(randomNumber) === false){
+            // Inserisco il numero generato nell'Array
+            randomUniqueNumbers.push(randomNumber);
+        }
+    
+    }
+    
+
+    return randomUniqueNumbers
+    
+}
 
 
 // Funzione di generazione della Griglia
@@ -32,6 +57,9 @@ function gameClickStart(){
 
     let gridSide = getSize();
     const numOfCells = gridSide ** 2 // number → ** significa elevato a, quindi si ottiene 10 x 10  
+
+    const bombs = generateBombs()
+    console.log(bombs)
 
     for(let i = 0; i < numOfCells; i++){
 
@@ -59,8 +87,17 @@ function gameClickStart(){
     
             console.log('Hai clickato la cella numero ', cellNumber)
         
-            cellDOMElement.classList.toggle('bg-azure') //object
-            
+            for(bombNumber = 0; bombNumber < bombs.length; bombNumber++){
+
+                if(cellNumber == bombs[bombNumber]){
+                    cellDOMElement.classList.add('bg-red')
+                    console.log('Mi dispiace, hai perso.')
+                } else{
+                    cellDOMElement.classList.add('bg-azure') //object
+                }
+    
+            }
+
             cellDOMElement.removeEventListener('click', cellClick)
         }
 
