@@ -93,7 +93,7 @@ function gameClickStart(){
         gridDOMElement.appendChild(cellDOMElement) ////object
 
         
-        
+        cellDOMElement.addEventListener('contextmenu', rightClick)
         cellDOMElement.addEventListener('click', cellClick)  
         cellDOMElement.addEventListener('click', function(){
             if (score === numOfCells - bombs.length){
@@ -156,6 +156,11 @@ function cellClick(){
     cellDOMElement.removeEventListener('click', cellClick)
 }
 
+// Funzione per le "bandierine"
+function rightClick(){
+    event.preventDefault(oncontextmenu)
+    this.classList.toggle('bg-green')
+}
 
 
 /// ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ Mie Funzioni ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ \\\
