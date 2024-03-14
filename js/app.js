@@ -25,6 +25,15 @@ function getSize() {
 // Funzione per il click on click //
 function showBombs() {
 
+    const allCells = document.querySelectorAll('.square')
+
+    for (let index = 0; index < allCells.length; index++){
+        const cellValue = parseInt(allCells[index].innerHTML)
+        if(bombs.includes(cellValue)){
+            allCells[index].classList.add('bg-red');
+            allCells[index].innerHTML = 'BOOM';
+        }
+    }
 }
 
 // // // // // // // // // // // // //
@@ -121,12 +130,11 @@ function gameClickReset(){
 
 // Funzione che determina cosa accade quando avviene un click sulla cella della griglia
 function cellClick(){
-    console.log("cellClick", this.innerHTML);
+    //console.log("cellClick", this.innerHTML);
     const cellDOMElement = this;
     const cellNumber = parseInt(cellDOMElement.innerHTML);
+    
     // const allCells = document.getElementsByClassName('square')
-    //console.log(allCells)
-    const allCells = document.querySelectorAll('.square')
     console.log('Hai clickato la cella numero ', cellNumber)
     for(let bombNumber = 0; bombNumber < bombs.length; bombNumber++){
 
@@ -143,28 +151,11 @@ function cellClick(){
             block.classList.add('block');
             gridDOMElement.append(block);
             bombs[bombNumber].click;
-            for (let index = 0; index < allCells.length; index++){
-                const cellValue = parseInt(allCells[index].innerHTML)
-                if(bombs.includes(cellValue)){
-                    allCells[index].classList.add('bg-red');
-                    allCells[index].innerHTML = 'BOOM';
-                }
-            }        
+            showBombs()
         }
     }
 
     
-    //console.dir(allCells)
-    console.log(bombs)
-    
-
-    // for (let index = 0; index < allCells.length; index++){
-    //     const cellValue = parseInt(allCells[index].innerHTML)
-    //     if(bombs.includes(cellValue)){
-    //         allCells[index].classList.add('bg-red');
-    //     }
-    // }
-
     if(!cellDOMElement.classList.contains('bg-red')){
         score += 1;
         console.log('punteggio attuale: ' + score)
@@ -198,7 +189,6 @@ const scoreDOMElement = document.getElementById('score') //object
 
 let score = parseInt(scoreDOMElement.innerHTML)
 let bombs = [];
-console.log(score)
 
 
 // Creazione delle varie griglie tramite funzione definita sopra
