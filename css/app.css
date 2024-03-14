@@ -1,0 +1,154 @@
+/* Reset Rules */
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+li, ul, menu{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* Layout  */
+
+.container{
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+
+/* Style */
+body{
+    background-color: rgb(129, 129, 129);
+}
+
+
+
+
+/* Header*/
+
+header{
+    margin-top: 20px;
+}
+
+.title{
+    text-align: center;
+    color: white;
+    font-size: 3rem;
+}
+
+
+
+/* Generating Section  */
+
+.difficulty-label{
+    color: white;
+    margin-top: -20px;
+    margin-left: -18px;
+    padding-bottom: 15px;
+    font-size: 20px;
+}
+
+#difficulty-selection{
+    text-align: center;
+    color: white;
+    background-color: black;   
+    padding: 2px 10px; 
+}
+
+
+
+.button-div{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#generate-grid,
+#delete-grid{
+    cursor: pointer;
+}
+
+
+
+#generate-grid{
+    padding: 10px;
+    background-color: rgb(36, 36, 36);
+    color: white;
+    font-size: 15px;
+}
+
+
+#delete-grid{
+    padding: 5px 10px;
+    background-color: rgb(51, 0, 0);
+    color: white;
+    border-radius: 18px;
+    margin-left: -100px;
+}
+
+
+
+#generate-grid:hover{
+background-color: rgb(0, 0, 0);
+}
+
+
+#delete-grid:hover{
+    background-color: rgb(112, 0, 0);
+
+}
+
+
+
+/* Grid and Squares */
+#grid{
+    margin: 30px 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.square-easy, 
+.square-medium, 
+.square-hard{
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(31, 31, 31);
+    color: white;
+    cursor: pointer;
+}
+
+
+.square-hard{
+    width: 10%;
+    aspect-ratio: 1/1;
+}
+
+.square-medium{
+    width: calc(100%/9);
+    aspect-ratio: 1/1;
+}
+
+
+.square-easy{
+    width: calc(100%/7);
+    aspect-ratio: 1/1;
+}
+
+
+/* Selected Grid Cell */
+
+.bg-azure{
+    background-color: rgb(0, 91, 196);
+}
+
+.bg-red{
+    background-color: brown;
+}
