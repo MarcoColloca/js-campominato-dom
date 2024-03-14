@@ -20,9 +20,8 @@ function getSize() {
     return size
 }
 
-// // // // // // // // // // // // //
-// // // // // // // // // // // // //
-// Funzione per il click on click //
+
+// Funzione per mostrare le bombe
 function showBombs() {
 
     const allCells = document.querySelectorAll('.square')
@@ -36,12 +35,8 @@ function showBombs() {
     }
 }
 
-// // // // // // // // // // // // //
-// // // // // // // // // // // // //
-// // // // // // // // // // // // //
 
 // Funzione per la generazione di bombe
-
 function generateBombs(){
     const min = 1;
     const max = size ** 2;
@@ -69,15 +64,10 @@ function generateBombs(){
 
 // Funzione di generazione della Griglia
 function gameClickStart(){
-    /*
-    let gridSide = parseInt(difficultySelectorDOMElement.value); //number
-    const numOfCells = gridSide ** 2 // number → ** significa elevato a, quindi si ottiene 10 x 10    
-    */
 
     let gridSide = getSize();
     const numOfCells = gridSide ** 2 // number → ** significa elevato a, quindi si ottiene 10 x 10  
 
-    // const bombs = generateBombs()
     bombs = generateBombs()
     console.log(bombs)
 
@@ -133,7 +123,7 @@ function cellClick(){
     //console.log("cellClick", this.innerHTML);
     const cellDOMElement = this;
     const cellNumber = parseInt(cellDOMElement.innerHTML);
-    
+
     // const allCells = document.getElementsByClassName('square')
     console.log('Hai clickato la cella numero ', cellNumber)
     for(let bombNumber = 0; bombNumber < bombs.length; bombNumber++){
