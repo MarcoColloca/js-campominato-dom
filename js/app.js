@@ -1,4 +1,4 @@
-console.log('JS Trial')
+console.log('JS Trial', this)
 
 
 /// ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ Mie Funzioni ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ \\\
@@ -24,9 +24,7 @@ function getSize() {
 // // // // // // // // // // // // //
 // Funzione per il click on click //
 function clickAllBombs() {
-    document.querySelectorAll(".bg-red").forEach(function(cellDOMElement) {
-        cellDOMElement.click();
-    });
+    
 }
 // // // // // // // // // // // // //
 // // // // // // // // // // // // //
@@ -69,7 +67,8 @@ function gameClickStart(){
     let gridSide = getSize();
     const numOfCells = gridSide ** 2 // number → ** significa elevato a, quindi si ottiene 10 x 10  
 
-    const bombs = generateBombs()
+    // const bombs = generateBombs()
+    bombs = generateBombs()
     console.log(bombs)
 
     for(let i = 0; i < numOfCells; i++){
@@ -93,37 +92,9 @@ function gameClickStart(){
         cellDOMElement.classList.add(divClass) //object
         gridDOMElement.appendChild(cellDOMElement) ////object
 
-        // Funzione che determina cosa accade quando avviene un click sulla cella della griglia
-        function cellClick(){
-            
-            console.log('Hai clickato la cella numero ', cellNumber)
-            for(bombNumber = 0; bombNumber < bombs.length; bombNumber++){
-
-                if(cellNumber === bombs[bombNumber]){
-
-                    cellDOMElement.classList.add('bg-red')
-                    console.log('Mi dispiace, hai perso.')
-                    cellDOMElement.innerHTML = 'BOOM'
-                    cellDOMElement.onclick = alert(`Hai perso! il tuo punteggo è: ${score}`)
-                } else{
-
-                    cellDOMElement.classList.add('bg-azure') //object
-
-                }
-            }
-
-            if(!cellDOMElement.classList.contains('bg-red')){
-                score += 1;
-                console.log(score)
-            }
-
-           
-            scoreDOMElement.innerHTML = score;
-            cellDOMElement.removeEventListener('click', cellClick)
-
-        }
         
-        cellDOMElement.addEventListener('click', cellClick)        
+        
+        cellDOMElement.addEventListener('click', cellClick)  
     }
 
     startButtonDOMElement.removeEventListener('click', gameClickStart);
@@ -139,14 +110,46 @@ function gameClickReset(){
 
 }
 
+// Funzione che determina cosa accade quando avviene un click sulla cella della griglia
+function cellClick(){
+    console.log("cellClick", this.innerHTML);
+    const cellDOMElement = this;
+    const cellNumber = parseInt(cellDOMElement.innerHTML);
 
+    console.log('Hai clickato la cella numero ', cellNumber)
+    for(let bombNumber = 0; bombNumber < bombs.length; bombNumber++){
+
+        if(cellNumber !== bombs[bombNumber]){
+
+            cellDOMElement.classList.add('bg-azure') //object
+
+        } else{
+
+            cellDOMElement.classList.add('bg-red')
+            console.log('Mi dispiace, hai perso.')
+            cellDOMElement.innerHTML = 'BOOM'
+            cellDOMElement.onclick = alert(`Hai perso! il tuo punteggo è: ${score}`)
+            let block = document.createElement('div');
+            block.classList.add('block')
+            console.log(gridDOMElement)
+            gridDOMElement.append(block)
+            console.log(block)
+        }
+    }
+
+    if(!cellDOMElement.classList.contains('bg-red')){
+        score += 1;
+        console.log(score)
+    }
+
+   
+    scoreDOMElement.innerHTML = score;
+    cellDOMElement.removeEventListener('click', cellClick)
+}
 
 
 
 /// ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ Mie Funzioni ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ \\\
-
-
-
 
 
 
@@ -166,6 +169,7 @@ const restartButtonDOMElement = document.getElementById('delete-grid') //object
 const scoreDOMElement = document.getElementById('score') //object
 
 let score = parseInt(scoreDOMElement.innerHTML)
+let bombs = [];
 console.log(score)
 
 
@@ -177,5 +181,3 @@ startButtonDOMElement.addEventListener('click', gameClickStart);
 // Reset delle griglie tramite funzione definita sopra
 restartButtonDOMElement.addEventListener('click', gameClickReset);
 
-
-generatedCells = document.getElementsByClassName('bg-red')
