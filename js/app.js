@@ -95,6 +95,14 @@ function gameClickStart(){
         
         
         cellDOMElement.addEventListener('click', cellClick)  
+        cellDOMElement.addEventListener('click', function(){
+            if (score === numOfCells - bombs.length){
+                alert('Complimenti hai completato il gioco!')
+                let block = document.createElement('div');
+                block.classList.add('block');
+                gridDOMElement.append(block);
+            }
+        })
     }
 
     startButtonDOMElement.removeEventListener('click', gameClickStart);
@@ -125,15 +133,15 @@ function cellClick(){
 
         } else{
 
-            cellDOMElement.classList.add('bg-red')
-            console.log('Mi dispiace, hai perso.')
-            cellDOMElement.innerHTML = 'BOOM'
-            cellDOMElement.onclick = alert(`Hai perso! il tuo punteggo è: ${score}`)
+            cellDOMElement.classList.add('bg-red');
+            console.log('Mi dispiace, hai perso.');
+            cellDOMElement.innerHTML = 'BOOM';
+            cellDOMElement.onclick = alert(`Hai perso! il tuo punteggo è: ${score}`);
             let block = document.createElement('div');
-            block.classList.add('block')
-            console.log(gridDOMElement)
-            gridDOMElement.append(block)
-            console.log(block)
+            block.classList.add('block');
+            // console.log(gridDOMElement);
+            gridDOMElement.append(block);
+            // console.log(block);
         }
     }
 
@@ -171,7 +179,6 @@ const scoreDOMElement = document.getElementById('score') //object
 let score = parseInt(scoreDOMElement.innerHTML)
 let bombs = [];
 console.log(score)
-
 
 
 // Creazione delle varie griglie tramite funzione definita sopra
