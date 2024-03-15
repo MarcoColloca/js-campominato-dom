@@ -158,8 +158,18 @@ function cellClick(){
 
 // Funzione per le "bandierine"
 function rightClick(){
+
+    const allCells = document.querySelectorAll('.square')
     event.preventDefault(oncontextmenu)
-    this.classList.toggle('bg-green')
+    if(!this.classList.contains('bg-green')){
+        this.classList.add('bg-green')
+        this.removeEventListener('click', cellClick)
+    } else{
+        this.classList.remove('bg-green')
+        this.addEventListener('click', cellClick)
+    }
+    
+    
 }
 
 
