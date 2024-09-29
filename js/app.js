@@ -69,7 +69,7 @@ function gameClickStart(){
     const numOfCells = gridSide ** 2 // number → ** significa elevato a, quindi si ottiene 10 x 10  
 
     bombs = generateBombs()
-    console.log(bombs)
+    console.log(bombs.sort(function(a, b) {return a - b}))
 
     for(let i = 0; i < numOfCells; i++){
 
@@ -125,7 +125,7 @@ function cellClick(){
     const cellNumber = parseInt(cellDOMElement.innerHTML);
 
     // const allCells = document.getElementsByClassName('square')
-    console.log('Hai clickato la cella numero ', cellNumber)
+    //console.log('Hai clickato la cella numero ', cellNumber)
     for(let bombNumber = 0; bombNumber < bombs.length; bombNumber++){
 
         if(cellNumber !== bombs[bombNumber]){
@@ -148,7 +148,7 @@ function cellClick(){
     
     if(!cellDOMElement.classList.contains('bg-red')){
         score += 1;
-        console.log('punteggio attuale: ' + score)
+        //console.log('punteggio attuale: ' + score)
     } 
 
    
